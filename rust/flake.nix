@@ -52,7 +52,9 @@
 
         package = craneLib.buildPackage { inherit cargoArtifacts src buildInputs; };
 
-        rustToolchain = pkgs.rust-bin.fromRustupToolchainFile ./rust-toolchain.toml;
+        rustToolchain = (pkgs.rust-bin.fromRustupToolchainFile ./rust-toolchain.toml).override {
+          extensions = [ "rust-src" "rust-analyzer" ];
+        };
       in
       with pkgs;
       {
